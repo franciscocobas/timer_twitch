@@ -1,38 +1,72 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+}
+@font-face {
+  font-family: 'IBMPlexRegular';
+  src: url('./fonts/IBMPlexSans-Regular.ttf');
+}
+@font-face {
+  font-family: 'IBMPlexExtraLight';
+  src: url('./fonts/IBMPlexSans-ExtraLight.ttf');
+}
+@font-face {
+  font-family: 'IBMPlexExtraLightItalic';
+  src: url('./fonts/IBMPlexSans-ExtraLightItalic.ttf');
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+body {
+  background: black;
   color: white;
+  font-size: 18px;
+  font-family: 'IBMPlexRegular';
+}
+.italic {
+  font-family: 'IBMPlexExtraLightItalic';
+}
+.main-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header .logo {
+  width: 10rem;
+  height: 10rem;
+}
+.header form input {
+  width: 6rem;
+  height: 5rem;
+  border-radius: 5px;
+  font-size: 1.5rem;
+}
+.header form span {
+  font-size: 2rem;
+  margin: 0 0.5rem;
+}
+.header form button {
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid gray;
+  cursor: pointer;
+  margin-left: 2rem;
+  font-size: 1.5rem;
+  background: rgb(177, 177, 177);
 }
 
-.App-link {
-  color: #61dafb;
+.timer-container {
+  font-size: 4rem;
+  font-family: 'IBMPlexExtraLight';
+}
+.clock {
+  font-size: 10rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.timer-and-social-networks-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
 }
