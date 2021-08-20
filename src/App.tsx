@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 function App() {
   const interval = useRef<any>(null);
   const [timer, setTimer] = useState<Date>(new Date(0, 0, 0, 0, 15, 5));
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch } = useForm();
 
   const onSubmit = ({
     hours,
@@ -21,11 +21,10 @@ function App() {
     setTimer(new Date(0, 0, 0, hours, minutes, seconds));
   };
 
-  const startTimer = (e: Event) => {
+  const startTimer = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     interval.current = setInterval(() => {
       setTimer((cTimer) => {
-        console.log(cTimer);
         let newSecond = cTimer.getSeconds();
         newSecond--;
         return new Date(
