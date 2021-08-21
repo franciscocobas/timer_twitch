@@ -38,12 +38,13 @@ body {
   height: 10rem;
 }
 .header form input {
-  width: 6rem;
+  width: 5rem;
   height: 5rem;
   border-radius: 5px;
   font-size: 1.5rem;
   -webkit-appearance: none;
   -moz-appearance: textfield;
+  padding: 0 1rem;
 }
 .header form span {
   font-size: 2rem;
