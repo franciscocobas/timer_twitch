@@ -3,10 +3,13 @@ import './App.css';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import TwitterImg from './images/twitter_white.svg';
+import TwitchSvg from './images/twitch_white.svg';
+
 function App() {
   const interval = useRef<any>(null);
   const [timer, setTimer] = useState<Date>(new Date(0, 0, 0, 0, 15, 5));
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit, watch, getValues } = useForm();
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
 
   useEffect(() => {
@@ -25,12 +28,16 @@ function App() {
     minutes: number;
     seconds: number;
   }) => {
-    console.log(hours, minutes, seconds);
     setTimer(new Date(0, 0, 0, hours, minutes, seconds));
   };
 
-  const startTimer = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const startOrStopTimer = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (isTimerRunning) {
+      setIsTimerRunning(false);
+      clearInterval(interval.current);
+      return;
+    }
     setIsTimerRunning(true);
     interval.current = setInterval(() => {
       setTimer((cTimer) => {
@@ -46,6 +53,19 @@ function App() {
         );
       });
     }, 1000);
+  };
+
+  const resetTimer = () => {
+    setTimer(
+      new Date(
+        0,
+        0,
+        0,
+        getValues('hours'),
+        getValues('minutes'),
+        getValues('seconds')
+      )
+    );
   };
 
   return (
@@ -70,8 +90,10 @@ function App() {
             {...register('seconds', { max: 2 })}
             disabled={isTimerRunning}
           />
-          <button onClick={startTimer}>Start</button>
-          <button>Reset</button>
+          <button onClick={startOrStopTimer}>
+            {isTimerRunning ? 'Stop' : 'Start'}
+          </button>
+          <button onClick={resetTimer}>Reset</button>
         </form>
       </div>
       <div className='timer-and-social-networks-container'>
@@ -92,12 +114,24 @@ function App() {
         </div>
         <div className='social-networks-container'>
           <div>
-            <img />
-            <a>@MrRobotUy</a>
+            <img src={TwitterImg} alt='Icono de Twitter' />
+            <a
+              href='https://twitter.com/MrRobotUy'
+              target='_blank'
+              rel='noreferrer'
+            >
+              @MrRobotUy
+            </a>
           </div>
           <div>
-            <img />
-            <a>@franciscoDEV_uy</a>
+            <img src={TwitchSvg} alt='Icono de Twitch' />
+            <a
+              href='https://www.twitch.tv/franciscodev_uy'
+              target='_blank'
+              rel='noreferrer'
+            >
+              @franciscoDEV_uy
+            </a>
           </div>
         </div>
       </div>

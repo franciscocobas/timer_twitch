@@ -73,3 +73,25 @@ body {
   display: grid;
   grid-template-columns: 3fr 1fr;
 }
+
+.social-networks-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.social-networks-container > div {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+.social-networks-container a {
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+.social-networks-container img {
+  width: 4rem;
+  height: 4rem;
+}
