@@ -11,6 +11,7 @@ function App() {
   const [timer, setTimer] = useState<Date>(new Date(0, 0, 0, 0, 15, 5));
   const { register, handleSubmit, watch, getValues } = useForm();
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
+  const [timerFinished, setTimerFinished] = useState<boolean>(false);
 
   useEffect(() => {
     const hours = watch(({ hours, minutes, seconds }) => {
@@ -43,6 +44,11 @@ function App() {
       setTimer((cTimer) => {
         let newSecond = cTimer.getSeconds();
         newSecond--;
+        if (newSecond === 0) {
+          setTimerFinished(true);
+          clearInterval(interval.current);
+          return new Date(0, 0, 0, 0, 0, 0);
+        }
         return new Date(
           cTimer.getFullYear(),
           cTimer.getMonth(),
@@ -99,7 +105,7 @@ function App() {
       <div className='timer-and-social-networks-container'>
         <div className='timer-container'>
           <p>Faltan</p>
-          <p className='clock'>
+          <p className={`${timerFinished ? 'finished' : ''} clock`}>
             {timer.getHours() < 10 ? `0${timer.getHours()}` : timer.getHours()}:
             {timer.getMinutes() < 10
               ? `0${timer.getMinutes()}`
